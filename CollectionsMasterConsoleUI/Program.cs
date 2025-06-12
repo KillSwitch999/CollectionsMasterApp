@@ -30,18 +30,21 @@ namespace CollectionsMasterConsoleUI
             Console.WriteLine("-------------------");
             //UNCOMMENT this method to print out your numbers from arrays or lists
             //NumberPrinter();
-            Console.WriteLine("-------------------");
 
             //TODO: Reverse the contents of the array and then print the array out to the console.
             //Try for 2 different ways
-            /*  1) First way, using a custom method => Hint: Array._____(); 
-                2) Second way, Create a custom method (scroll to bottom of page to find ⬇⬇⬇)
-            */
+            
+            //Reverse using built-in method
+            Console.WriteLine("All Numbers Reversed (built-in)");
             Array.Reverse(numbers);
-            Console.WriteLine("All Numbers Reversed:");
-            Console.WriteLine("---------REVERSE CUSTOM------------");
+            NumberPrinter(numbers);
             Console.WriteLine("-------------------");
-
+            
+            //Reverse using custom method
+            Console.WriteLine("All Numbers Reversed (manual method):");
+            ReverseArray(numbers);
+            NumberPrinter(numbers);
+            Console.WriteLine("-------------------");
             //TODO: Create a method that will set numbers that are a multiple of 3 to zero then print to the console all numbers
             Console.WriteLine("Multiple of three = 0: ");
             ThreeKiller(numbers);
@@ -80,11 +83,20 @@ namespace CollectionsMasterConsoleUI
             //TODO: Create a method that prints if a user number is present in the list
             //Remember: What if the user types "abc" accident your app should handle that!
             Console.WriteLine("What number will you search for in the number list?");
-            
+            string userInput = Console.ReadLine();
+            bool isValid = int.TryParse(userInput, out int searchNumber);
+            if (isValid)
+            {
+                NumberChecker(numberList, searchNumber);
+            }
+            else
+            {
+                Console.WriteLine("Invalid input. Not a number.");
+            }
+
             Console.WriteLine("-------------------");
 
             Console.WriteLine("All Numbers:");
-            //UNCOMMENT this method to print out your numbers from arrays or lists
             NumberPrinter(numberList);
             Console.WriteLine("-------------------");
 
@@ -103,6 +115,10 @@ namespace CollectionsMasterConsoleUI
 
             //TODO: Convert the list to an array and store that into a variable
             int[] finalArray = numberList.ToArray();
+            
+            Console.WriteLine("Final array from list before it was cleared:");
+            NumberPrinter(finalArray);
+            Console.WriteLine("-------------------");
 
             //TODO: Clear the list
             numberList.Clear();
